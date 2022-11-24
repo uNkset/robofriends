@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'tachyons';
+import Card from './components/Card';
+
+const data = {
+  src: 'https://robohash.org/test',
+  name: 'Miytagi Sensei',
+  email: 'gypsi@gmail.com',
+};
 
 class App extends Component {
   render() {
-    return (
-      <div className="f1 tc">
-        Yo mama
-      </div>
-    );
+    return <Card src={data.src} name={data.name} email={data.email} />;
   }
 }
 
