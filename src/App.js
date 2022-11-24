@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'tachyons';
-import CardList from './components/CardList';
 import { robots } from './robots';
+import SearchBox from './components/SearchBox';
+import CardList from './components/CardList';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      robots: robots,
+      searchField: '',
+    };
+  }
+
+  onPress = (e) => {
+    this.setState({ searchField: e.target.value });
+  };
+
   render() {
+    let filtered = this.state.robots.filter((i) =>
+      i.name.toLowerCase().includes(this.state.searchField) ? i : ''
+    );
+
     return (
-      <div>
-        <h1 className="f1 tc">Robo Friends!</h1>
-        <CardList robots={robots} />
+      <div className="tc">
+        <SearchBox onPress={this.onPress} />
+        <h1 className="f1">Robo Friends!</h1>
+        <CardList robots={filtered} />
       </div>
     );
   }
