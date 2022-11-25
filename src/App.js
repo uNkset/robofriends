@@ -5,6 +5,7 @@ import 'tachyons';
 import SearchBox from './components/SearchBox';
 import CardList from './components/CardList';
 import Scroll from './components/Scroll';
+import ErrorBoundry from './components/ErrorBoundry';
 
 class App extends Component {
   constructor() {
@@ -38,7 +39,9 @@ class App extends Component {
         <SearchBox onPress={this.onPress} />
         <h1 className="f1">Robo Friends</h1>
         <Scroll>
-          <CardList robots={filtered} />
+          <ErrorBoundry>
+            <CardList robots={filtered} />
+          </ErrorBoundry>
         </Scroll>
       </div>
     );
