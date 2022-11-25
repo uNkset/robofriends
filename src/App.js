@@ -16,12 +16,8 @@ class App extends Component {
 
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
-      .then((res) => {
-        return res.json();
-      })
-      .then((users) => {
-        this.setState({ robots: users });
-      });
+      .then((res) => res.json())
+      .then((users) => this.setState({ robots: users }));
   }
 
   onPress = (e) => {
@@ -33,13 +29,17 @@ class App extends Component {
       i.name.toLowerCase().includes(this.state.searchField) ? i : ''
     );
 
-    return (
-      <div className="tc">
-        <SearchBox onPress={this.onPress} />
-        <h1 className="f1">Robo Friends!</h1>
-        <CardList robots={filtered} />
-      </div>
-    );
+    if (this.state.robots.length === 0) {
+      return <h1>Loading</h1>;
+    } else {
+      return (
+        <div className="tc">
+          <SearchBox onPress={this.onPress} />
+          <h1 className="f1">Robo Friends!</h1>
+          <CardList robots={filtered} />
+        </div>
+      );
+    }
   }
 }
 
