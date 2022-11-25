@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'tachyons';
-import { robots } from './robots';
+//import { robots } from './robots';
 import SearchBox from './components/SearchBox';
 import CardList from './components/CardList';
 
@@ -9,9 +9,19 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      robots: robots,
+      robots: [],
       searchField: '',
     };
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((res) => {
+        return res.json();
+      })
+      .then((users) => {
+        this.setState({ robots: users });
+      });
   }
 
   onPress = (e) => {
